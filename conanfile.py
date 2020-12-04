@@ -15,7 +15,7 @@ class QSettingsContainerConan(ConanFile):
     # No settings/options are necessary, this is header only
 
     def package(self):
-        self.copy("*.h")
+        self.copy("*.h", keep_path=False, dst="include/dragoonboots/qsettingscontainer")
 
     def package_id(self):
         self.info.header_only()

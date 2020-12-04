@@ -1,14 +1,8 @@
 #ifndef QSETTINGSCONTAINER_INCLUDE_QSETTINGSCONTAINER_H_
-#define #ifndef QSETTINGSCONTAINER_INCLUDE_QSETTINGSCONTAINER_H_
+#define QSETTINGSCONTAINER_INCLUDE_QSETTINGSCONTAINER_H_
 
 #include <QSettings>
 #include <QHash>
-
-#ifdef WIN32
-#define QSettingsContainer_EXPORT __declspec(dllexport)
-#else
-#define QSettingsContainer_EXPORT
-#endif
 
 /**
  * Similar to @ref SETTING, but uses different storage type and value types.
@@ -110,7 +104,7 @@ namespace qsettingscontainer {
 /**
  * Settings container
  */
-class QSettingsContainer_EXPORT QSettingsContainer {
+class QSettingsContainer {
  public:
   QSettingsContainer() = delete;
   QSettingsContainer(const QSettingsContainer &) = delete;
