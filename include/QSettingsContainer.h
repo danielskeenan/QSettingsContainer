@@ -104,7 +104,8 @@
  */
 #define DGSETTINGS_STATE(T, name, default_val) DGSETTINGS_STATE_CAST(T, T, name, default_val)
 
-namespace dragoonboots::qsettingscontainer {
+namespace dragoonboots {
+namespace qsettingscontainer {
 
 /**
  * Settings container
@@ -125,7 +126,8 @@ class QSettingsContainer_EXPORT QSettingsContainer {
   static inline QHash<QString, QVariant> state_;
 };
 
-} // dragoonboots::qsettingscontainer
+} // qsettingscontainer
+} // dragoonboots
 
 #endif //QSETTINGSCONTAINER_INCLUDE_QSETTINGSCONTAINER_H_
 

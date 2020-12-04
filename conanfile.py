@@ -1,5 +1,3 @@
-import os
-
 from conans import ConanFile
 
 
@@ -13,6 +11,7 @@ class QSettingsContainerConan(ConanFile):
     topics = ("Qt",)
     exports_sources = "include/*"
     no_copy_source = True
+
     # No settings/options are necessary, this is header only
 
     def package(self):
