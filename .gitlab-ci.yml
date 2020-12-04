@@ -3,7 +3,7 @@ variables:
   CONAN_CHANNEL: "testing"
   CONAN_LOGIN_USERNAME: "ci_user"
   CONAN_PASSWORD: "${CI_JOB_TOKEN}"
-  CONAN_REMOTES: "${CI_API_V4_URL}/packages/conan@True@gitlab"
+  CONAN_UPLOAD: "${CI_API_V4_URL}/packages/conan@True@gitlab"
 
 gcc-9:
   image: conanio/gcc9
