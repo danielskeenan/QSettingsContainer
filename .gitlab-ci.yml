@@ -16,7 +16,7 @@ gcc-9:
   script:
     - python build.py
 
-doc:
+pages:
   stage: doc
   image: python:3.8-alpine
   rules:
