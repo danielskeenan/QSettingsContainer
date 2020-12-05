@@ -141,8 +141,9 @@ namespace qsettingscontainer {
  * Settings container
  *
  * Use @ref DGSETTINGS_SETTING, @ref DGSETTINGS_SETTING_CAST, @ref DGSETTINGS_STATE,
- * and @ref DGSETTINGS_STATE_CAST
- * to define settings.
+ * and @ref DGSETTINGS_STATE_CAST to define settings.
+ *
+ * Get/set settings using the static methods defined after using the above macros.
  */
 class QSettingsContainer {
  public:
