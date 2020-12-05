@@ -18,13 +18,12 @@ gcc-9:
 
 doc:
   stage: doc
-  image: sphinxdoc/sphinx
+  image: python/3.8-alpine
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
   before_script:
-    - pip3 install conan breathe sphinx-substitution-extensions
-    - apt-get update
-    - apt-get install --no-install-recommends -y cmake gcc doxygen
+    - apk add cmake gcc doxygen
+    - pip install conan sphinx breathe sphinx-substitution-extensions
   script:
     - mkdir build
     - cmake -S . -B build -DQSETTINGSCONTAINER_BUILD_DOC=On
