@@ -22,7 +22,7 @@ doc:
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
   before_script:
-    - apk add cmake gcc doxygen make
+    - apk add cmake gcc g++ doxygen make
     - pip install conan sphinx breathe sphinx-substitution-extensions
   script:
     - mkdir build
