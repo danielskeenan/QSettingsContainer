@@ -1,13 +1,17 @@
-Welcome to QSettingsContainer's documentation!
-==============================================
+QSettingsContainer
+==================
+
+**QSettingsContainer** is a header-only library designed to simplify interacting
+with `QSettings <https://doc.qt.io/qt-5/qsettings.html>`_ storage.  Instead of
+using error-prone string constants and casting the result, a specific API is
+defined for stored settings.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-**QSettingsContainer** is designed to simplify interacting with `QSettings <https://doc.qt.io/qt-5/qsettings.html>`_
-storage.  Instead of using error-prone string constants and casting the result,
-a specific API is defined for stored settings.
+   usage
+   api
 
 Example
 -------
@@ -36,10 +40,3 @@ Example
    Settings::GetInterval();     // returns 0
    Settings::SetInterval(30);
    Settings::GetInterval();     // returns 30
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
