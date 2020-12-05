@@ -27,9 +27,8 @@ doc:
   script:
     - mkdir build
     - cmake -S . -B build -DQSETTINGSCONTAINER_BUILD_DOC=On
-    - cd build
-    - make
-    - cp -Rv doc/html ${CI_PROJECT_DIR}/public
+    - cmake --build build --target qsettingscontainer_doc
+    - cp -Rv build/doc/html ${CI_PROJECT_DIR}/public
   artifacts:
     paths:
       - public
