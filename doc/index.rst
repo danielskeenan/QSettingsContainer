@@ -40,3 +40,8 @@ Example
    Settings::GetInterval();     // returns 0
    Settings::SetInterval(30);
    Settings::GetInterval();     // returns 30
+
+License
+-------
+
+.. include:: ../LICENSE.txt
