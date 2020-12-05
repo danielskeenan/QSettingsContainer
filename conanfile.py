@@ -1,4 +1,4 @@
-from conans import ConanFile
+from conans import ConanFile, CMake
 
 
 class QSettingsContainerConan(ConanFile):
@@ -9,13 +9,19 @@ class QSettingsContainerConan(ConanFile):
     url = "<Package recipe repository url here, for issues about the package>"
     description = "Manage QSettings"
     topics = ("Qt",)
-    exports_sources = "include/*"
-    no_copy_source = True
+    exports_sources = "include/*", "src/*", "CMakeLists.txt"
+    # no_copy_source = True
 
     # No settings/options are necessary, this is header only
 
+    def _configure_cmake(self):
+        cmake = CMake(self)
+        cmake.configure()
+        return cmake
+
     def package(self):
-        self.copy("*.h")
+        cmake = self._configure_cmake()
+        cmake.install()
 
     def package_id(self):
         self.info.header_only()
