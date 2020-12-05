@@ -1,3 +1,11 @@
+/**
+ * @file QSettingsContainer.h
+ *
+ * @author Dan Keenan
+ * @date 2020
+ * @copyright Boost Software License, Version 1.0
+ */
+
 #ifndef QSETTINGSCONTAINER_INCLUDE_QSETTINGSCONTAINER_H_
 #define QSETTINGSCONTAINER_INCLUDE_QSETTINGSCONTAINER_H_
 
