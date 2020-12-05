@@ -3,7 +3,6 @@
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
-import json
 import re
 import subprocess
 from pathlib import Path
@@ -43,7 +42,8 @@ copyright = '{year}, {author}'.format(year=date.today().year, author=conanfile['
 author = conanfile['author']
 
 # The full version, including alpha/beta/rc tags
-release = conanfile['version']
+version = conanfile['version']
+release = version
 
 # -- General configuration ---------------------------------------------------
 
@@ -51,6 +51,9 @@ release = conanfile['version']
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'breathe',
+    'sphinx-prompt',
+    'sphinx_substitution_extensions',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -63,6 +66,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 primary_domain = 'cpp'
 
+rst_prolog = """
+.. |version| replace:: {version}
+""".format(version=version)
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -74,3 +81,7 @@ html_theme = 'nature'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# -- Options for Breathe ------------------------------------------------------
+breathe_default_project = 'QSettingsContainer'
+breathe_default_members = ('members', 'undoc-members')

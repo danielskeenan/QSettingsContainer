@@ -5,7 +5,7 @@
 #include <QHash>
 
 /**
- * Similar to @ref SETTING, but uses different storage type and value types.
+ * Similar to @ref DGSETTINGS_SETTING, but uses different storage type and value types.
  *
  * @param val_T value type; must be castable using static_cast() to @p storage_t
  * @param storage_T storage type; must be storable in a [QVariant](https://doc.qt.io/qt-5/qvariant.html)
@@ -13,8 +13,17 @@
  * @param default_val Default value to use if no value has previously been
  * stored; must be of type @p val_T
  *
- * @see DGSETTINGS_SETTING
- * @see DGSETTINGS_STATE_CAST
+ * @par Example
+ * @code{.cpp}
+ * DGSETTINGS_SETTING_CAST(Breed, unsigned int, PuppyBreed, Breed::Mix)
+ * @endcode
+ * results in the following method definitions:
+ * @code{.cpp}
+ * static Breed GetPuppyBreed();
+ * static void SetPuppyBreed(Breed value);
+ * static Breed GetDefaultPuppyBreed();
+ * @endcode
+ * casting the value to `unsigned int` when interfacing with QSettings.
  */
 #define DGSETTINGS_SETTING_CAST(val_T, storage_T, name, default_val)          \
   static val_T Get##name() {                                                  \
@@ -37,23 +46,33 @@
 /**
  * Create a new setting that persists between executions.
  *
- * Settings are stored persistently using [QSettings](https://doc.qt.io/qt-5/qsettings.html);
- * for non-persistent state information, see @ref STATE.
+ * Defines three static methods: `Get<name>`, `Set<name>`, and `GetDefault<name>`.
  *
- * For enum-type variables with a different storage type, see @ref SETTING_CAST.
+ * Settings are stored persistently using [QSettings](https://doc.qt.io/qt-5/qsettings.html);
+ * for non-persistent state information, see @ref DGSETTINGS_STATE.
+ *
+ * For enum-type variables with a different storage type, see @ref DGSETTINGS_SETTING_CAST.
  *
  * @param T value type; must be storable in a [QVariant](https://doc.qt.io/qt-5/qvariant.html)
  * @param name Getter/setter name
  * @param default_val Default value to use if no value has previously been
  * stored; must be of type @p T
  *
- * @see DGSETTINGS_STATE
- * @see DGSETTINGS_SETTING_CAST
+ * @par Example
+ * @code{.cpp}
+ * DGSETTINGS_SETTING(int, Puppies, 0)
+ * @endcode
+ * results in the following method definitions:
+ * @code{.cpp}
+ * static int GetPuppies();
+ * static void SetPuppies(int value);
+ * static int GetDefaultPuppies();
+ * @endcode
  */
 #define DGSETTINGS_SETTING(T, name, default_val) DGSETTINGS_SETTING_CAST(T, T, name, default_val)
 
 /**
- * Similar to @ref STATE, but uses different storage type and value types.
+ * Similar to @ref DGSETTINGS_STATE, but uses different storage type and value types.
  *
  * @param val_T value type; must be castable using static_cast() to @p storage_t
  * @param storage_T storage type; must be storable in a [QVariant](https://doc.qt.io/qt-5/qvariant.html)
@@ -61,10 +80,19 @@
  * @param default_val Default value to use if no value has previously been
  * stored; must be of type @p val_T
  *
- * @see DGSETTINGS_STATE
- * @see DGSETTINGS_SETTING_CAST
+ * @par Example
+ * @code{.cpp}
+ * DGSETTINGS_STATE_CAST(LogLevel, unsigned int, Logging, LogLevel::Warn)
+ * @endcode
+ * results in the following method definitions:
+ * @code{.cpp}
+ * static LogLevel GetLogging();
+ * static void SetLogging(LogLevel value);
+ * static LogLevel GetDefaultLogging();
+ * @endcode
+ * casting the value to `unsigned int` so it may be stored in memory.
  */
-#define DGSETTINGS_STATE_CAST(val_T, storage_T, name, default_val)     \
+#define DGSETTINGS_STATE_CAST(val_T, storage_T, name, default_val)       \
   static val_T Get##name() {                                             \
     if (!state_.contains(#name)) {                                       \
       return default_val;                                                \
@@ -84,17 +112,25 @@
  * Create a new global state variable.
  *
  * State information does not persist between executions.
- * For persistent storage, see @ref SETTING.
+ * For persistent storage, see @ref DGSETTINGS_SETTING.
  *
- * For enum-type variables with a different storage type, see @ref STATE_CAST.
+ * For enum-type variables with a different storage type, see @ref DGSETTINGS_STATE_CAST.
  *
  * @param T value type; must be storable in a [QVariant](https://doc.qt.io/qt-5/qvariant.html)
  * @param name Getter/setter name
  * @param default_val Default value to use if no value has previously been
  * stored; must be of type @p T
  *
- * @see DGSETTINGS_STATE_CAST
- * @see DGSETTINGS_SETTING
+ * @par Example
+ * @code{.cpp}
+ * DGSETTINGS_STATE(bool, DebugMode, false)
+ * @endcode
+ * results in the following method definitions:
+ * @code{.cpp}
+ * static bool GetDebugMode();
+ * static void SetDebugMode(bool value);
+ * static bool GetDefaultDebugMode();
+ * @endcode
  */
 #define DGSETTINGS_STATE(T, name, default_val) DGSETTINGS_STATE_CAST(T, T, name, default_val)
 
@@ -103,6 +139,10 @@ namespace qsettingscontainer {
 
 /**
  * Settings container
+ *
+ * Use @ref DGSETTINGS_SETTING, @ref DGSETTINGS_SETTING_CAST, @ref DGSETTINGS_STATE,
+ * and @ref DGSETTINGS_STATE_CAST
+ * to define settings.
  */
 class QSettingsContainer {
  public:
