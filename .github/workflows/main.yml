@@ -16,9 +16,13 @@ jobs:
       CONAN_UPLOAD: https://api.bintray.com/conan/dragoonboots/QSettingsContainer
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
       - name: Install package tools
         run: |
-          pip3 install --user conan_package_tools
-          echo "$(python3 -m site --user-base)/bin" >> $GITHUB_PATH
+          python -m pip install --upgrade pip setuptools wheel
+          pip install conan_package_tools
       - name: Build Conan package
-        run: python3 build.py
+        run: python build.py
