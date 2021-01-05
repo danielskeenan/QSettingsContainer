@@ -29,7 +29,7 @@ jobs:
 
   pages:
     runs-on: ubuntu-latest
-#    if: ${{github.ref == 'refs/heads/master'}}
+    if: ${{github.ref == 'refs/heads/master'}}
     env:
       SOURCE_DIR: ${{github.workspace}}
       BUILD_DIR: ${{github.workspace}}/build
