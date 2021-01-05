@@ -44,17 +44,17 @@
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="conan">
 <h2>Conan<a class="headerlink" href="#conan" title="Permalink to this headline">¶</a></h2>
-<p>See available packages <a class="reference external" href="https://gitlab.com/dragoonboots-packages/qsettingscontainer/-/packages">here</a>.</p>
+<p>See available packages <a class="reference external" href="https://bintray.com/dragoonboots/conan-packages/QSettingsContainer%3Adragoonboots">here</a>.</p>
 <ol class="arabic simple">
 <li><p>Setup the Conan remote:</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan remote add <span class="s2">&quot;qsettingscontainer&quot;</span> <span class="s2">&quot;https://gitlab.com/api/v4/projects/22902505/packages/conan&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan remote add <span class="s2">&quot;dragoonboots&quot;</span> <span class="s2">&quot;https://api.bintray.com/conan/dragoonboots/conan-packages&quot;</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
 <li><p>Install the package:</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan install <span class="s2">&quot;QSettingsContainer/1.0.0@dragoonboots-packages+qsettingscontainer/stable&quot;</span> --remote<span class="o">=</span><span class="s2">&quot;qsettingscontainer&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan install <span class="s2">&quot;QSettingsContainer/1.0.0@dragoonboots/stable&quot;</span> --remote<span class="o">=</span><span class="s2">&quot;dragoonboots&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -63,7 +63,7 @@
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">FetchContent</span><span class="p">)</span>
 <span class="nb">FetchContent_Declare</span><span class="p">(</span>
   <span class="s">QSettingsContainer</span>
-  <span class="s">GIT_REPOSITORY</span> <span class="s2">&quot;git@gitlab.com:dragoonboots-packages/qsettingscontainer.git&quot;</span>
+  <span class="s">GIT_REPOSITORY</span> <span class="s2">&quot;https://github.com/DragoonBoots/QSettingsContainer.git&quot;</span>
   <span class="s">GIT_TAG</span>        <span class="s">v1.0.0</span>
 <span class="p">)</span>
 <span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">QSettingsContainer</span><span class="p">)</span>

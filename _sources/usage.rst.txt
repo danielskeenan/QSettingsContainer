@@ -4,20 +4,20 @@ Usage
 Conan
 -----
 
-See available packages `here <https://gitlab.com/dragoonboots-packages/qsettingscontainer/-/packages>`_.
+See available packages `here <https://bintray.com/dragoonboots/conan-packages/QSettingsContainer%3Adragoonboots>`_.
 
 1. Setup the Conan remote:
 
 .. code-block:: bash
 
-   conan remote add "qsettingscontainer" "https://gitlab.com/api/v4/projects/22902505/packages/conan"
+   conan remote add "dragoonboots" "https://api.bintray.com/conan/dragoonboots/conan-packages"
 
 2. Install the package:
 
 .. code-block:: bash
    :substitutions:
 
-   conan install "QSettingsContainer/|version|@dragoonboots-packages+qsettingscontainer/stable" --remote="qsettingscontainer"
+   conan install "QSettingsContainer/|version|@dragoonboots/stable" --remote="dragoonboots"
 
 CMake FetchContent
 ------------------
@@ -27,7 +27,7 @@ CMake FetchContent
    include(FetchContent)
    FetchContent_Declare(
      QSettingsContainer
-     GIT_REPOSITORY "git@gitlab.com:dragoonboots-packages/qsettingscontainer.git"
+     GIT_REPOSITORY "https://github.com/DragoonBoots/QSettingsContainer.git"
      GIT_TAG        v|version|
    )
    FetchContent_MakeAvailable(QSettingsContainer)
