@@ -3,6 +3,8 @@ QSettingsContainer
 
 ![CI](https://github.com/DragoonBoots/QSettingsContainer/workflows/CI/badge.svg)
 
+[ ![Download](https://api.bintray.com/packages/dragoonboots/conan-packages/QSettingsContainer%3Adragoonboots/images/download.svg) ](https://bintray.com/dragoonboots/conan-packages/QSettingsContainer%3Adragoonboots/_latestVersion)
+
 **QSettingsContainer** is a header-only library designed to simplify interacting
 with [QSettings](https://doc.qt.io/qt-5/qsettings.html) storage.  Instead of
 using error-prone string constants and casting the result, a specific API is
