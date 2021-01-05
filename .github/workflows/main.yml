@@ -13,7 +13,7 @@ jobs:
       CONAN_REPO: QSettingsContainer
       CONAN_CHANNEL: testing
       CONAN_PASSWORD: ${{secrets.CONAN_KEY}}
-      CONAN_UPLOAD: https://api.bintray.com/conan/dragoonboots/QSettingsContainer
+      CONAN_UPLOAD: https://api.bintray.com/conan/dragoonboots/conan-packages
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
