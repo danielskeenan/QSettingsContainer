@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push: ~
+  pull_request: ~
+  workflow_dispatch: ~
+
+env:
+  CONAN_USERNAME: dragoonboots
+  CONAN_REPO: QSettingsContainer
+
+jobs:
+  conan:
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - gcc9
+    runs-on: ubuntu-latest
+    container:
+      image: conanio/${{matrix.compiler}}
+      env:
+        CONAN_USERNAME: ${{env.CONAN_USERNAME}}
+        CONAN_CHANNEL: testing
+        CONAN_PASSWORD: ${{secrets.CONAN_KEY}}
+        CONAN_UPLOAD: https://api.bintray.com/conan/${{env.CONAN_USERNAME}}/${{env.CONAN_REPO}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install package tools
+        run: sudo pip install --upgrade conan_package_tools
+      - name: Build Conan package
+        run: python build.py
