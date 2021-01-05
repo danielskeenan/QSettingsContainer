@@ -30,6 +30,9 @@ jobs:
   pages:
     runs-on: ubuntu-latest
 #    if: ${{github.ref == 'refs/heads/master'}}
+    env:
+      SOURCE_DIR: ${{github.workspace}}
+      BUILD_DIR: ${{github.workspace}}/build
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -47,11 +50,11 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install conan sphinx breathe sphinx-substitution-extensions
       - name: Configure CMake
-        run: cmake -S . -B build -DQSETTINGSCONTAINER_BUILD_DOC=On
+        run: cmake -S "${SOURCE_DIR}" -B "${BUILD_DIR}" -DQSETTINGSCONTAINER_BUILD_DOC=On
       - name: Build
-        run: cmake --build build --target qsettingscontainer_doc
+        run: cmake --build "${BUILD_DIR}" --target qsettingscontainer_doc
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/doc/html
+          publish_dir: ${{env.BUILD_DIR}}/doc/html
