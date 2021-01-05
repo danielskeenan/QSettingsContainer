@@ -13,7 +13,7 @@ jobs:
       CONAN_REPO: QSettingsContainer
       CONAN_CHANNEL: testing
       CONAN_PASSWORD: ${{secrets.CONAN_KEY}}
-      CONAN_UPLOAD: https://api.bintray.com/conan/${{env.CONAN_USERNAME}}/${{env.CONAN_REPO}}
+      CONAN_UPLOAD: https://api.bintray.com/conan/dragoonboots/QSettingsContainer
     steps:
       - uses: actions/checkout@v2
       - name: Install package tools
