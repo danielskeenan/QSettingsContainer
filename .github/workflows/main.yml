@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push: ~
+  pull_request: ~
+  workflow_dispatch: ~
+
+jobs:
+  conan:
+    runs-on: ubuntu-latest
+    env:
+      CONAN_USERNAME: dragoonboots
+      CONAN_REPO: QSettingsContainer
+      CONAN_CHANNEL: testing
+      CONAN_PASSWORD: ${{secrets.CONAN_KEY}}
+      CONAN_UPLOAD: https://api.bintray.com/conan/dragoonboots/conan-packages
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install package tools
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install conan_package_tools
+      - name: Build Conan package
+        run: python build.py
+
+  pages:
+    runs-on: ubuntu-latest
+    if: ${{github.ref == 'refs/heads/master'}}
+    env:
+      SOURCE_DIR: ${{github.workspace}}
+      BUILD_DIR: ${{github.workspace}}/build
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Create Build Environment
+        run: mkdir "${BUILD_DIR}"
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install doxygen
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install conan sphinx breathe sphinx-substitution-extensions
+      - name: Configure CMake
+        run: cmake -S "${SOURCE_DIR}" -B "${BUILD_DIR}" -DQSETTINGSCONTAINER_BUILD_DOC=On
+      - name: Build
+        run: cmake --build "${BUILD_DIR}" --target qsettingscontainer_doc
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{env.BUILD_DIR}}/doc/html
