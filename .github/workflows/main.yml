@@ -26,3 +26,32 @@ jobs:
           pip install conan_package_tools
       - name: Build Conan package
         run: python build.py
+
+  pages:
+    runs-on: ubuntu-latest
+#    if: ${{github.ref == 'refs/heads/master'}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Create Build Environment
+        run: mkdir "${BUILD_DIR}"
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install doxygen
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install conan sphinx breathe sphinx-substitution-extensions
+      - name: Configure CMake
+        run: cmake -S . -B build -DQSETTINGSCONTAINER_BUILD_DOC=On
+      - name: Build
+        run: cmake --build build --target qsettingscontainer_doc
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/doc/html
