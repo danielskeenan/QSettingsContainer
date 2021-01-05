@@ -11,22 +11,17 @@ env:
 
 jobs:
   conan:
-    strategy:
-      fail-fast: false
-      matrix:
-        compiler:
-          - gcc9
     runs-on: ubuntu-latest
-    container:
-      image: conanio/${{matrix.compiler}}
-      env:
-        CONAN_USERNAME: ${{env.CONAN_USERNAME}}
-        CONAN_CHANNEL: testing
-        CONAN_PASSWORD: ${{secrets.CONAN_KEY}}
-        CONAN_UPLOAD: https://api.bintray.com/conan/${{env.CONAN_USERNAME}}/${{env.CONAN_REPO}}
+    env:
+      CONAN_USERNAME: ${{env.CONAN_USERNAME}}
+      CONAN_CHANNEL: testing
+      CONAN_PASSWORD: ${{secrets.CONAN_KEY}}
+      CONAN_UPLOAD: https://api.bintray.com/conan/${{env.CONAN_USERNAME}}/${{env.CONAN_REPO}}
     steps:
       - uses: actions/checkout@v2
       - name: Install package tools
-        run: sudo pip install --upgrade conan_package_tools
+        run: |
+          pip3 install --user conan_package_tools
+          echo "$(python3 -m site --user-base)/bin" >> $GITHUB_PATH
       - name: Build Conan package
-        run: python build.py
+        run: python3 build.py
