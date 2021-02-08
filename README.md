@@ -1,7 +1,7 @@
 QSettingsContainer
 ==================
 
-![CI](![CI](https://github.com/danielskeenan/QSettingsContainer/workflows/CI/badge.svg))
+![CI](https://github.com/danielskeenan/QSettingsContainer/workflows/CI/badge.svg)
 
 [ ![Download](https://api.bintray.com/packages/dragoonboots/conan-packages/QSettingsContainer%3Adragoonboots/images/download.svg) ](https://bintray.com/dragoonboots/conan-packages/QSettingsContainer%3Adragoonboots/_latestVersion)
 
