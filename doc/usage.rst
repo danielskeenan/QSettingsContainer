@@ -27,7 +27,7 @@ CMake FetchContent
    include(FetchContent)
    FetchContent_Declare(
      QSettingsContainer
-     GIT_REPOSITORY "https://github.com/DragoonBoots/QSettingsContainer.git"
+     GIT_REPOSITORY "https://github.com/danielskeenan/QSettingsContainer.git"
      GIT_TAG        v|version|
    )
    FetchContent_MakeAvailable(QSettingsContainer)

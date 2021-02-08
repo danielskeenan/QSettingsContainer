@@ -6,8 +6,8 @@ class QSettingsContainerConan(ConanFile):
     version = "1.0.0"
     license = "BSL-1.0"
     author = "Dan Keenan <dk@dankeenan.org>"
-    url = "<Package recipe repository url here, for issues about the package>"
-    description = "Manage QSettings"
+    url = "https://github.com/danielskeenan/QSettingsContainer"
+    description = "A header-only library designed to simplify interacting with QSettings storage"
     topics = ("Qt",)
     exports_sources = "include/*", "src/*", "CMakeLists.txt"
     # no_copy_source = True
