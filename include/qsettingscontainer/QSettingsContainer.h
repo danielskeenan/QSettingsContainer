@@ -142,7 +142,6 @@
  */
 #define DGSETTINGS_STATE(T, name, default_val) DGSETTINGS_STATE_CAST(T, T, name, default_val)
 
-namespace dragoonboots {
 namespace qsettingscontainer {
 
 /**
@@ -170,7 +169,6 @@ class QSettingsContainer {
 };
 
 } // qsettingscontainer
-} // dragoonboots
 
 #endif //QSETTINGSCONTAINER_INCLUDE_QSETTINGSCONTAINER_H_
 
