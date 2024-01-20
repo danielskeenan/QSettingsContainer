@@ -15,7 +15,7 @@ include(CMakePackageConfigHelpers)
 configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/QSettingsContainer-config.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/QSettingsContainer-config.cmake"
-    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/QSettingsContainer"
+    INSTALL_DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/QSettingsContainer"
 )
 write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/QSettingsContainer-version.cmake"
@@ -26,5 +26,5 @@ write_basic_package_version_file(
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/QSettingsContainer-config.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/QSettingsContainer-version.cmake"
-    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/QSettingsContainer"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/QSettingsContainer"
 )
