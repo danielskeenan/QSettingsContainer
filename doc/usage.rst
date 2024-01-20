@@ -1,24 +1,6 @@
 Usage
 =====
 
-Conan
------
-
-See available packages `here <https://dragoonboots.jfrog.io/ui/packages>`_.
-
-1. Setup the Conan remote:
-
-.. code-block:: bash
-
-   conan remote add <REMOTE> https://dragoonboots.jfrog.io/artifactory/api/conan/conan-packages
-
-2. Install the package:
-
-.. code-block:: bash
-   :substitutions:
-
-   conan install "QSettingsContainer/|version|@dragoonboots/stable" --remote <REMOTE>
-
 CMake FetchContent
 ------------------
 .. code-block:: cmake
