@@ -12,6 +12,24 @@
 #include <QSettings>
 #include <QHash>
 
+#if !defined(DGSETTINGS_CODESTYLE_UPPER_CAMEL_CASE) && !defined(DGSETTINGS_CODESTYLE_LOWER_CAMEL_CASE) && !defined(DGSETTINGS_CODESTYLE_LOWER_SNAKE_CASE)
+#define DGSETTINGS_CODESTYLE_LOWER_CAMEL_CASE
+#endif
+
+#if defined(DGSETTINGS_CODESTYLE_UPPER_CAMEL_CASE)
+#define DGSETTINGS_GET Get
+#define DGSETTINGS_SET Set
+#define DGSETTINGS_GETDEFAULT DGSETTINGS_GET##Default
+#elif defined(DGSETTINGS_CODESTYLE_LOWER_CAMEL_CASE)
+#define DGSETTINGS_GET get
+#define DGSETTINGS_SET set
+#define DGSETTINGS_GETDEFAULT DGSETTINGS_GET##Default
+#elif defined(DGSETTINGS_CODESTYLE_LOWER_SNAKE_CASE)
+#define DGSETTINGS_GET get_
+#define DGSETTINGS_SET set_
+#define DGSETTINGS_GETDEFAULT DGSETTINGS_GET##default_
+#endif
+
 /**
  * Similar to @ref DGSETTINGS_SETTING, but uses different storage type and value types.
  *
@@ -34,7 +52,7 @@
  * casting the value to `unsigned int` when interfacing with QSettings.
  */
 #define DGSETTINGS_SETTING_CAST(val_T, storage_T, name, default_val)          \
-  static val_T Get##name() {                                                  \
+  static val_T DGSETTINGS_GET##name() {                                       \
     const QVariant val_variant = QSettings().value(#name);                    \
     if (!val_variant.isValid()) {                                             \
       return default_val;                                                     \
@@ -42,12 +60,12 @@
     return static_cast<val_T>(val_variant.value<storage_T>());                \
   }                                                                           \
   /** Set @ref Get##name() */                                                 \
-  static void Set##name(const val_T &val) {                                   \
+  static void DGSETTINGS_SET##name(const val_T &val) {                        \
     const auto val_storage = static_cast<storage_T>(val);                     \
     QSettings().setValue(#name, QVariant::fromValue<storage_T>(val_storage)); \
   }                                                                           \
   /** Default value for @ref Get##name() */                                   \
-  static val_T GetDefault##name() {                                           \
+  static val_T DGSETTINGS_GETDEFAULT##name() {                                \
     return default_val;                                                       \
   }                                                                           \
 
@@ -101,18 +119,18 @@
  * casting the value to `unsigned int` so it may be stored in memory.
  */
 #define DGSETTINGS_STATE_CAST(val_T, storage_T, name, default_val)       \
-  static val_T Get##name() {                                             \
+  static val_T DGSETTINGS_GET##name() {                                  \
     if (!state_.contains(#name)) {                                       \
       return default_val;                                                \
     }                                                                    \
     return static_cast<val_T>(state_.value(#name).value<storage_T>());   \
   }                                                                      \
   /** Set @ref Get##name() */                                            \
-  static void Set##name(const val_T &val) {                              \
+  static void DGSETTINGS_SET##name(const val_T &val) {                   \
     state_[#name] = static_cast<storage_T>(val);                         \
   }                                                                      \
    /** Get default for @ref Get##name() */                               \
-  static val_T GetDefault##name() {                                      \
+  static val_T DGSETTINGS_GETDEFAULT##name() {                           \
     return default_val;                                                  \
   }                                                                      \
 
@@ -169,6 +187,10 @@ class QSettingsContainer {
 };
 
 } // qsettingscontainer
+
+#undef DGSETTINGS_GET
+#undef DGSETTINGS_SET
+#undef DGSETTINGS_GETDEFAULT
 
 #endif //QSETTINGSCONTAINER_INCLUDE_QSETTINGSCONTAINER_H_
 
