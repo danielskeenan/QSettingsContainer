@@ -49,7 +49,7 @@ jobs:
       - name: Install python dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          pip install conan sphinx breathe sphinx-substitution-extensions
+          pip install conan sphinx breathe sphinx-substitution-extensions sphinx-prompt
       - name: Configure CMake
         run: cmake -S "${SOURCE_DIR}" -B "${BUILD_DIR}" -DQSETTINGSCONTAINER_BUILD_DOC=On
       - name: Build

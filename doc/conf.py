@@ -3,25 +3,8 @@
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
-import re
-import subprocess
-from pathlib import Path
+import json
 from datetime import date
-
-
-def conan_info() -> dict:
-    conanfile_path = Path(__file__).parent / '..'
-    result = subprocess.run(['conan', 'inspect', str(conanfile_path)], check=True, capture_output=True, text=True)
-    info = {}
-    pattern = re.compile(r'^(?P<key>.+): (?P<value>.+)$')
-    for line in result.stdout.splitlines():
-        data = pattern.match(line)
-        if not data:
-            continue
-        info[data.group('key')] = data.group('value')
-
-    return info
-
 
 # -- Path setup --------------------------------------------------------------
 
@@ -34,15 +17,18 @@ def conan_info() -> dict:
 # sys.path.insert(0, os.path.abspath('.'))
 
 
+# -- Build info --------------------------------------------------------------
+with open('build_info.json') as f:
+    build_info = json.load(f)
+
 # -- Project information -----------------------------------------------------
 
-conanfile = conan_info()
-project = conanfile['name']
-copyright = '{year}, {author}'.format(year=date.today().year, author=conanfile['author'])
-author = conanfile['author']
+project = 'QSettingsContainer'
+copyright = '{year}, {author}'.format(year=date.today().year, author=build_info['author'])
+author = build_info['author']
 
 # The full version, including alpha/beta/rc tags
-version = conanfile['version']
+version = build_info['version']
 release = version
 
 # -- General configuration ---------------------------------------------------
@@ -83,5 +69,5 @@ html_theme = 'nature'
 html_static_path = ['_static']
 
 # -- Options for Breathe ------------------------------------------------------
-breathe_default_project = 'QSettingsContainer'
+breathe_default_project = build_info['name']
 breathe_default_members = ('members', 'undoc-members')

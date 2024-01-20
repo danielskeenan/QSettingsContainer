@@ -1,7 +1,7 @@
 API
 ===
 
-.. doxygenclass:: dragoonboots::qsettingscontainer::QSettingsContainer
+.. doxygenclass:: qsettingscontainer::QSettingsContainer
 
 .. doxygendefine:: DGSETTINGS_SETTING
 

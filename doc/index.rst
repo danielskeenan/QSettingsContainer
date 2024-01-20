@@ -28,9 +28,9 @@ Example
 .. code-block:: c++
    :caption: After
 
-   #include <dragoonboots/qsettingscontainer/QSettingsContainer.h>
+   #include <qsettingscontainer/QSettingsContainer.h>
 
-   class Settings : public dragoonboots::qsettingscontainer::QSettingsContainer {
+   class Settings : public qsettingscontainer::QSettingsContainer {
     public:
      DGSETTINGS_SETTING(int, Interval, 0)
    };
