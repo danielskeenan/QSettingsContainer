@@ -37,9 +37,9 @@ Example
 
    // ---Snip---
 
-   Settings::GetInterval();     // returns 0
-   Settings::SetInterval(30);
-   Settings::GetInterval();     // returns 30
+   Settings::getInterval();     // returns 0
+   Settings::setInterval(30);
+   Settings::getInterval();     // returns 30
 
 License
 -------
