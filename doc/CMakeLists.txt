@@ -11,7 +11,7 @@ string(JSON SPHINX_BUILD_INFO SET "${SPHINX_BUILD_INFO}" "author" "\"${PROJECT_A
 string(JSON SPHINX_BUILD_INFO SET "${SPHINX_BUILD_INFO}" "version" "\"${PROJECT_VERSION}\"")
 file(WRITE "${CMAKE_CURRENT_LIST_DIR}/build_info.json" "${SPHINX_BUILD_INFO}")
 
-get_target_property(qsettingscontainer_SOURCES QSettingsContainer INTERFACE_SOURCES)
+get_target_property(qsettingscontainer_SOURCES QSettingsContainer SOURCES)
 get_target_property(qsettingscontainer_INCLUDES QSettingsContainer INTERFACE_INCLUDE_DIRECTORIES)
 set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/api")
 set(DOXYGEN_JAVADOC_AUTOBRIEF YES)
